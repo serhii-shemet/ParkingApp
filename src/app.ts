@@ -22,24 +22,25 @@ parkingLotManager.createParkingLot(parkingLotAId, limitationsForParkingLotA);
 parkingLotManager.createParkingLot(parkingLotBId, limitationsForParkingLotB);
 
 let parkingLots = parkingLotManager.getParkingLots();
-console.log("1", parkingLots);
+console.log("Created two parking lots");
 
 parkingLotManager.editParkingLot(parkingLotAId, limitationsForParkingLotB);
 parkingLots = parkingLotManager.getParkingLots();
-console.log("1", parkingLots);
+console.log("Updated parking lot A");
 
 parkingLotManager.deleteParkingLot(parkingLotBId);
 parkingLots = parkingLotManager.getParkingLots();
-console.log("1", parkingLots);
+console.log("Deleted parking lot B");
 
 const parkingLot = parkingLotManager.findParkingLot(parkingLotAId);
 
-// Get available spaces
+
+// Park cars
+console.log("Available spaces before parking.");
 console.log("Available spaces for ElectricCars:", parkingLot.getAvailableSpaces(ParkingType.ElectricCars));
 console.log("Available spaces for OrdinaryCars:", parkingLot.getAvailableSpaces(ParkingType.OrdinaryCars));
 console.log("Available spaces for Trucks:", parkingLot.getAvailableSpaces(ParkingType.Trucks));
 
-// Park cars
 const car1: Car = { id: "AA", type: ParkingType.ElectricCars };
 const ticket1 = parkingLot.parkCar(car1);
 console.log("Car 1 parked:", car1, ticket1);
@@ -52,7 +53,17 @@ const car3: Car = { id: "KA", type: ParkingType.Trucks };
 const ticket3 = parkingLot.parkCar(car3);
 console.log("Car 3 parked:", car3, ticket3);
 
-// Get available spaces
+console.log("Available spaces after parking.");
+console.log("Available spaces for ElectricCars:", parkingLot.getAvailableSpaces(ParkingType.ElectricCars));
+console.log("Available spaces for OrdinaryCars:", parkingLot.getAvailableSpaces(ParkingType.OrdinaryCars));
+console.log("Available spaces for Trucks:", parkingLot.getAvailableSpaces(ParkingType.Trucks));
+
+
+// Retrieve cars
+parkingLot.retrieveCar(ticket2);
+parkingLot.retrieveCar(ticket3);
+
+console.log("Available spaces after car retrieval.");
 console.log("Available spaces for ElectricCars:", parkingLot.getAvailableSpaces(ParkingType.ElectricCars));
 console.log("Available spaces for OrdinaryCars:", parkingLot.getAvailableSpaces(ParkingType.OrdinaryCars));
 console.log("Available spaces for Trucks:", parkingLot.getAvailableSpaces(ParkingType.Trucks));
